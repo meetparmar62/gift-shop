@@ -1111,20 +1111,33 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
     }
     
-    .categories-grid,
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
     .products-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
     
     .reviews-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
     
     .instagram-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
 }
 
@@ -1144,6 +1157,7 @@ h1, h2, h3, h4, h5, h6 {
     
     .filter-buttons {
         gap: 10px;
+        flex-wrap: wrap;
     }
     
     .filter-btn {
@@ -1151,7 +1165,85 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 0.85rem;
     }
     
+    /* Keep 2 columns for most grids on mobile */
+    .categories-grid,
+    .products-grid,
+    .reviews-grid,
+    .features-grid,
     .instagram-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    /* Stats grid - 2 columns on very small screens */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    /* Reduce padding on cards for mobile */
+    .category-card {
+        padding: 20px 15px;
+    }
+    
+    .product-info h3 {
+        font-size: 1rem;
+    }
+    
+    .product-price {
+        font-size: 1.2rem;
+    }
+    
+    .btn-order {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+    }
+    
+    /* Adjust icon sizes */
+    .category-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .category-icon i {
+        font-size: 1.8rem;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .feature-icon i {
+        font-size: 1.8rem;
+    }
+    
+    /* Product image adjustments for mobile */
+    .product-image {
+        height: 200px;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .category-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .category-card p {
+        font-size: 0.85rem;
+    }
+    
+    .review-text {
+        font-size: 0.9rem;
+    }
+    
+    .insta-item {
+        border-radius: 8px;
     }
 }
