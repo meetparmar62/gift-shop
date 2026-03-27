@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - S N Gift</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Admin Stylesheet -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <i class="fas fa-gift"></i>
+                <h1>S N Gift Admin</h1>
+                <p>Manage your store with ease</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="username" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <div class="login-hint">
+                    <p>Demo Credentials:</p>
+                    <p>Username: <strong>admin</strong></p>
+                    <p>Password: <strong>admin123</strong></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard (Hidden by default) -->
+    <div id="adminDashboard" class="admin-container" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-gift"></i>
+                <span>S N Gift Admin</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="products">
+                    <i class="fas fa-box"></i>
+                    <span>Products</span>
+                    <span class="badge" id="productCount">0</span>
+                </a>
+                <a href="#" class="nav-item" data-section="categories">
+                    <i class="fas fa-tags"></i>
+                    <span>Categories</span>
+                </a>
+                <a href="#" class="nav-item" data-section="features">
+                    <i class="fas fa-star"></i>
+                    <span>Why Choose Us</span>
+                </a>
+                <a href="#" class="nav-item" data-section="reviews">
+                    <i class="fas fa-comments"></i>
+                    <span>Reviews</span>
+                    <span class="badge" id="reviewCount">0</span>
+                </a>
+                <a href="#" class="nav-item" data-section="instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram Gallery</span>
+                </a>
+                <a href="#" class="nav-item" data-section="contact">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Contact Info</span>
+                </a>
+                <a href="#" class="nav-item" data-section="stats">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Statistics</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 id="pageTitle">Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboardSection" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon products">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="dashProductCount">0</h3>
+                            <p>Total Products</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon categories">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="dashCategoryCount">0</h3>
+                            <p>Categories</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon reviews">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="dashReviewCount">0</h3>
+                            <p>Customer Reviews</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon features">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="dashFeatureCount">0</h3>
+                            <p>Features</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Analytics Section -->
+                <div class="analytics-section">
+                    <h3 style="margin-bottom: 20px; color: var(--dark);"><i class="fas fa-chart-line"></i> Detailed Analytics</h3>
+                    
+                    <!-- Product Analytics -->
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h4><i class="fas fa-shopping-cart"></i> Product Analysis</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-row">
+                                    <span class="metric-label">Average Product Price:</span>
+                                    <span class="metric-value" id="avgProductPrice">₹0</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Highest Priced:</span>
+                                    <span class="metric-value" id="highestPrice">₹0</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Lowest Priced:</span>
+                                    <span class="metric-value" id="lowestPrice">₹0</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Products with Badges:</span>
+                                    <span class="metric-value" id="productsWithBadges">0</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Total Inventory Value:</span>
+                                    <span class="metric-value highlight" id="totalInventoryValue">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Category Distribution -->
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h4><i class="fas fa-chart-pie"></i> Category Distribution</h4>
+                            </div>
+                            <div class="card-body" id="categoryDistribution">
+                                <!-- Dynamic category breakdown -->
+                            </div>
+                        </div>
+
+                        <!-- Review Analytics -->
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h4><i class="fas fa-star-half-alt"></i> Review Analytics</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-row">
+                                    <span class="metric-label">Average Rating:</span>
+                                    <span class="metric-value" id="avgRating">0⭐</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">5-Star Reviews:</span>
+                                    <span class="metric-value" id="fiveStarReviews">0</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Total Customers Reviewed:</span>
+                                    <span class="metric-value" id="totalReviewers">0</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Top Locations:</span>
+                                    <span class="metric-value-small" id="topLocations">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Metrics -->
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h4><i class="fas fa-briefcase"></i> Business Metrics</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-row">
+                                    <span class="metric-label">Years in Business:</span>
+                                    <span class="metric-value" id="bizYears">0</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Happy Customers:</span>
+                                    <span class="metric-value" id="bizCustomers">0</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Gifts Delivered:</span>
+                                    <span class="metric-value" id="bizGifts">0</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Overall Rating:</span>
+                                    <span class="metric-value" id="bizRating">0/5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price Range Visualization -->
+                    <div class="price-range-card">
+                        <div class="card-header">
+                            <h4><i class="fas fa-chart-bar"></i> Price Range Analysis</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="price-bars" id="priceRangeBars">
+                                <!-- Dynamic price range bars -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-box"></i> Recent Products</h3>
+                            <a href="#" class="btn-link" onclick="showSection('products')">View All</a>
+                        </div>
+                        <div id="recentProducts" class="card-content"></div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-comments"></i> Recent Reviews</h3>
+                            <a href="#" class="btn-link" onclick="showSection('reviews')">View All</a>
+                        </div>
+                        <div id="recentReviews" class="card-content"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Management Section -->
+            <section id="productsSection" class="content-section">
+                <div class="section-actions">
+                    <button class="btn-primary" onclick="openProductModal()">
+                        <i class="fas fa-plus"></i> Add New Product
+                    </button>
+                </div>
+                
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Badge</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Products will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Categories Management Section -->
+            <section id="categoriesSection" class="content-section">
+                <div class="section-actions">
+                    <button class="btn-primary" onclick="openCategoryModal()">
+                        <i class="fas fa-plus"></i> Add New Category
+                    </button>
+                </div>
+                
+                <div class="cards-grid" id="categoriesGrid">
+                    <!-- Categories will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Features Management Section -->
+            <section id="featuresSection" class="content-section">
+                <div class="section-actions">
+                    <button class="btn-primary" onclick="openFeatureModal()">
+                        <i class="fas fa-plus"></i> Add New Feature
+                    </button>
+                </div>
+                
+                <div class="cards-grid" id="featuresGrid">
+                    <!-- Features will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Reviews Management Section -->
+            <section id="reviewsSection" class="content-section">
+                <div class="section-actions">
+                    <button class="btn-primary" onclick="openReviewModal()">
+                        <i class="fas fa-plus"></i> Add New Review
+                    </button>
+                </div>
+                
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Rating</th>
+                                <th>Customer Name</th>
+                                <th>Location</th>
+                                <th>Review Text</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reviewsTableBody">
+                            <!-- Reviews will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Instagram Gallery Section -->
+            <section id="instagramSection" class="content-section">
+                <div class="section-actions">
+                    <button class="btn-primary" onclick="openInstagramModal()">
+                        <i class="fas fa-plus"></i> Add New Image
+                    </button>
+                </div>
+                
+                <div class="instagram-grid-admin" id="instagramGrid">
+                    <!-- Instagram images will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Contact Info Section -->
+            <section id="contactSection" class="content-section">
+                <form id="contactForm" class="admin-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Store Address</label>
+                            <textarea id="storeAddress" rows="3" required></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number 1</label>
+                            <input type="text" id="phone1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number 2</label>
+                            <input type="text" id="phone2">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Store Hours (Weekdays)</label>
+                            <input type="text" id="weekdayHours" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Store Hours (Sunday)</label>
+                            <input type="text" id="sundayHours" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Instagram Handle</label>
+                            <input type="text" id="instagramHandle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>WhatsApp Number</label>
+                            <input type="text" id="whatsappNumber" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Google Maps Embed URL</label>
+                            <textarea id="mapsEmbed" rows="2" required></textarea>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-full">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+            </section>
+
+            <!-- Statistics Section -->
+            <section id="statsSection" class="content-section">
+                <div class="stats-detail-grid">
+                    <div class="detail-card">
+                        <h3><i class="fas fa-calendar-check"></i> Business Experience</h3>
+                        <div class="stat-edit">
+                            <input type="number" id="yearsExperience" value="16">
+                            <span>Years</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h3><i class="fas fa-users"></i> Happy Customers</h3>
+                        <div class="stat-edit">
+                            <input type="number" id="happyCustomers" value="474">
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h3><i class="fas fa-gifts"></i> Gifts Delivered</h3>
+                        <div class="stat-edit">
+                            <input type="number" id="giftsDelivered" value="1000">
+                            <span>+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h3><i class="fas fa-star"></i> Overall Rating</h3>
+                        <div class="stat-edit">
+                            <input type="number" id="overallRating" value="4.9" step="0.1" min="0" max="5">
+                            <span>/ 5.0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-primary" onclick="updateStatistics()">
+                    <i class="fas fa-save"></i> Update Statistics
+                </button>
+            </section>
+        </main>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Add New Product</h3>
+                <button class="modal-close" onclick="closeProductModal()">&times;</button>
+            </div>
+            <form id="productForm">
+                <input type="hidden" id="productId">
+                
+                <div class="form-group">
+                    <label>Product Name *</label>
+                    <input type="text" id="productName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select id="productCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="birthday">Birthday</option>
+                        <option value="anniversary">Anniversary</option>
+                        <option value="couple">Couple</option>
+                        <option value="customized">Customized</option>
+                        <option value="surprise">Surprise</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Price (₹) *</label>
+                    <input type="number" id="productPrice" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Image URL *</label>
+                    <input type="url" id="productImage" required>
+                    <small>Paste image URL from Unsplash or other source</small>
+                </div>
+                
+                <div class="form-group">
+                    <label>Badge (Optional)</label>
+                    <select id="productBadge">
+                        <option value="">None</option>
+                        <option value="Bestseller">Bestseller</option>
+                        <option value="New">New</option>
+                        <option value="Sale">Sale</option>
+                    </select>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeProductModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Modal -->
+    <div id="categoryModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3 id="categoryModalTitle">Add New Category</h3>
+                <button class="modal-close" onclick="closeCategoryModal()">&times;</button>
+            </div>
+            <form id="categoryForm">
+                <input type="hidden" id="categoryId">
+                
+                <div class="form-group">
+                    <label>Category Name *</label>
+                    <input type="text" id="categoryName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Icon Class *</label>
+                    <input type="text" id="categoryIcon" placeholder="fas fa-birthday-cake" required>
+                    <small>Use Font Awesome icon classes</small>
+                </div>
+                
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea id="categoryDescription" rows="3" required></textarea>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeCategoryModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Feature Modal -->
+    <div id="featureModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3 id="featureModalTitle">Add New Feature</h3>
+                <button class="modal-close" onclick="closeFeatureModal()">&times;</button>
+            </div>
+            <form id="featureForm">
+                <input type="hidden" id="featureId">
+                
+                <div class="form-group">
+                    <label>Feature Title *</label>
+                    <input type="text" id="featureTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Icon Class *</label>
+                    <input type="text" id="featureIcon" placeholder="fas fa-medal" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea id="featureDescription" rows="3" required></textarea>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeFeatureModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Feature</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="reviewModalTitle">Add New Review</h3>
+                <button class="modal-close" onclick="closeReviewModal()">&times;</button>
+            </div>
+            <form id="reviewForm">
+                <input type="hidden" id="reviewId">
+                
+                <div class="form-group">
+                    <label>Customer Name *</label>
+                    <input type="text" id="reviewerName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Location *</label>
+                    <input type="text" id="reviewerLocation" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Rating *</label>
+                    <select id="reviewRating" required>
+                        <option value="5">⭐⭐⭐⭐⭐ (5 Stars)</option>
+                        <option value="4">⭐⭐⭐⭐ (4 Stars)</option>
+                        <option value="3">⭐⭐⭐ (3 Stars)</option>
+                        <option value="2">⭐⭐ (2 Stars)</option>
+                        <option value="1">⭐ (1 Star)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Review Text *</label>
+                    <textarea id="reviewText" rows="4" required></textarea>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeReviewModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Review</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Instagram Modal -->
+    <div id="instagramModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3 id="instagramModalTitle">Add New Image</h3>
+                <button class="modal-close" onclick="closeInstagramModal()">&times;</button>
+            </div>
+            <form id="instagramForm">
+                <input type="hidden" id="instagramId">
+                
+                <div class="form-group">
+                    <label>Image URL *</label>
+                    <input type="url" id="instagramImageUrl" required>
+                    <small>Paste Instagram post image URL</small>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeInstagramModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Image</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Admin JavaScript -->
+    <script src="js/admin.js"></script>
+</body>
+</html>
